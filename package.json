@@ -1,0 +1,9 @@
+{
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "elasticsearch": "^13.2.0",
+    "pa11y": "^4.11.0"
+  }
+}
