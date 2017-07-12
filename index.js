@@ -8,7 +8,7 @@ const pa11yOptions = {
 const test = pa11y();
 
 const timestamp = Date.now();
-const path = '/';
+const defaultPath = '/';
 const codeRegex = /Principle(\d+).*Guideline([0-9_]+)\.([0-9_]+)/;
 
 if (!process.env.ES_HOST) {
@@ -78,7 +78,7 @@ client.indices.putMapping({
 	 });
 }).then(result => {
 	return Promise.all(result.hits.hits.map(doc =>
-		testUrl(doc._source.schema, doc._source.host, path)
+		testUrl(doc._source.schema, doc._source.host, doc._source.path || defaultPath)
 		.then(() => incrementRunCount(doc))
 	));
 }).then(() => {
