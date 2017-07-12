@@ -27,7 +27,7 @@ function incrementRunCount(doc) {
 		id: doc._id,
 		body: {
 			doc: {
-				run: (doc._source.run || 0) + 1
+				scans: (doc._source.scans || 0) + 1
 			}
 		}
 	});
