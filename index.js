@@ -8,6 +8,8 @@ const pa11yOptions = {
 const test = pa11y();
 
 const timestamp = Date.now();
+const d = new Date();
+const date = `${d.getFullYear()}-${d.getMonth()+1}-${d.getDate()}`;
 const defaultPath = '/';
 const codeRegex = /Principle(\d+).*Guideline([0-9_]+)\.([0-9_]+)/;
 
@@ -44,9 +46,10 @@ function testUrl(schema, hostname, path) {
 			}
 			const body = results.reduce((prev, curr) => {
 				const [_, principle, guideline, rule] = codeRegex.exec(curr.code);
+				const doc = Object.assign({}, curr, { timestamp, hostname, path, principle, guideline, rule, date });
 				return [...prev,
 					{ index: { _index: 'tests', _type: 'pa11y' }},
-					Object.assign({}, curr, { timestamp, hostname, path, principle, guideline, rule })
+					doc
 				];
 			}, []);
 
