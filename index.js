@@ -75,6 +75,7 @@ client.indices.putMapping({
 	console.log('Put mapping to ES!');
 	return client.search({
 		 index: 'urls',
+		 size: 1000
 	 });
 }).then(result => {
 	return Promise.all(result.hits.hits.map(doc =>
